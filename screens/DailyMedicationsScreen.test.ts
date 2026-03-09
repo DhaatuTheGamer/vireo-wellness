@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isSameDay } from './DailyMedicationsScreen';
+import { isSameDay } from 'date-fns';
 
 describe('isSameDay', () => {
     it('should return true for the exact same date object', () => {

@@ -5,18 +5,10 @@ import { isSameDay } from 'date-fns';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
-import { isSameDay } from 'date-fns';
 import { useAppContext } from '../contexts/AppContext';
 import { MedicationEntry } from '../types';
 import { Calendar, Plus, Pill } from 'lucide-react';
 
-export const isSameDay = (date1: Date, date2: Date) => {
-    return (
-        date1.getFullYear() === date2.getFullYear() &&
-        date1.getMonth() === date2.getMonth() &&
-        date1.getDate() === date2.getDate()
-    );
-};
 
 const DailyMedicationsScreen: React.FC = () => {
     const navigate = useNavigate();
