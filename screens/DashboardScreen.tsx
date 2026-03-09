@@ -69,7 +69,17 @@ const DashboardScreen: React.FC = () => {
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [widgets, setWidgets] = useState<WidgetConfig[]>(() => {
     const saved = localStorage.getItem('dashboardWidgets');
-    return saved ? JSON.parse(saved) : DEFAULT_WIDGETS;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+      } catch (e) {
+        console.error('Failed to parse dashboard widgets from local storage:', e);
+      }
+    }
+    return DEFAULT_WIDGETS;
   });
 
   useEffect(() => {
