@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { isSameDay } from 'date-fns';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import BloodSugarChart from '../components/BloodSugarChart';
@@ -9,7 +10,6 @@ import CustomizeDashboardModal, { WidgetConfig } from '../components/CustomizeDa
 import { MOCK_DASHBOARD_STATS, MOCK_BLOOD_SUGAR_READINGS } from '../constants';
 import { Bell, Droplet, Pill, Footprints, Flame, ChevronRight, Settings2, Flame as FlameIcon, Plus, Minus } from 'lucide-react';
 import { useAppContext } from '../contexts/AppContext';
-import { isSameDay } from 'date-fns';
 
 interface StatCardProps {
   icon: React.ElementType;
