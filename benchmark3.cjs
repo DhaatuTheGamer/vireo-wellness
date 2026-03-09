@@ -8,35 +8,37 @@ const isSameDay = (date1, date2) => {
   );
 };
 
-const entries = Array.from({ length: 1000000 }).map((_, i) => ({
+const entries = Array.from({ length: 100 }).map((_, i) => ({
   takenAt: new Date(Date.now() - Math.random() * 10000000000).toISOString()
 }));
 
 // Warmup
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 100; i++) {
   entries.filter(e => isSameDay(new Date(e.takenAt), new Date())).length;
   const today = new Date();
   entries.filter(e => isSameDay(new Date(e.takenAt), today)).length;
 }
 
+const RUNS = 10000;
+
 // Baseline
 let baselineTime = 0;
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < RUNS; i++) {
   const start = performance.now();
   entries.filter(e => isSameDay(new Date(e.takenAt), new Date())).length;
   baselineTime += performance.now() - start;
 }
-baselineTime /= 10;
+baselineTime /= RUNS;
 
 // Optimized
 let optimizedTime = 0;
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < RUNS; i++) {
   const start = performance.now();
   const today = new Date();
   entries.filter(e => isSameDay(new Date(e.takenAt), today)).length;
   optimizedTime += performance.now() - start;
 }
-optimizedTime /= 10;
+optimizedTime /= RUNS;
 
 console.log(`Baseline Time: ${baselineTime.toFixed(4)} ms`);
 console.log(`Optimized Time: ${optimizedTime.toFixed(4)} ms`);
