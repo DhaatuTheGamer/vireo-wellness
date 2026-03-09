@@ -1,11 +1,12 @@
 
 import { FoodItem, Device, BloodSugarReading, DashboardStats, User, DailyMealGroup, MealType, MealEntry } from './types';
-import { AppleHealthIcon, ContourNextIcon, DexcomIcon, GlucoseBuddyIcon } from './components/Icons'; // Assuming these are defined
 import React from 'react';
 
-
 export const MOCK_USER: User = {
-  name: 'Emily',
+  name: 'Rohit Kumar',
+  email: 'rohit.kumar@example.com',
+  phone: '5551234567',
+  countryCode: 'IN',
 };
 
 export const MOCK_FOOD_ITEMS: FoodItem[] = [
@@ -63,15 +64,4 @@ export const MOCK_DASHBOARD_STATS: DashboardStats = {
   pillsTaken: 1, // Example
   activitySteps: 244,
   carbsIntake: 522, // Example, this seems high, adjust if it's daily total
-};
-
-
-export const getDeviceIcon = (deviceName: string): React.ReactNode => {
-  // These specific color overrides are now less critical as Icons.tsx standardizes them to cyan-400
-  // However, keeping them allows for potential future divergence if needed.
-  if (deviceName.toLowerCase().includes('contour')) return React.createElement(ContourNextIcon, { className: "w-8 h-8 text-cyan-400" });
-  if (deviceName.toLowerCase().includes('dexcom')) return React.createElement(DexcomIcon, { className: "w-8 h-8 text-cyan-400" });
-  if (deviceName.toLowerCase().includes('apple')) return React.createElement(AppleHealthIcon, { className: "w-8 h-8 text-cyan-400" }); // Was red-400
-  if (deviceName.toLowerCase().includes('glucose buddy')) return React.createElement(GlucoseBuddyIcon, { className: "w-8 h-8 text-cyan-400" }); // Was green-400
-  return React.createElement(GlucoseBuddyIcon, { className: "w-8 h-8 text-slate-400" }); // Default, was gray-400
 };

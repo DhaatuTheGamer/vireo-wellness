@@ -58,6 +58,9 @@ export interface DashboardStats {
 
 export interface User {
   name: string;
+  email: string;
+  phone: string;
+  countryCode: string;
 }
 
 export interface SelectedFoodItem extends FoodItem {

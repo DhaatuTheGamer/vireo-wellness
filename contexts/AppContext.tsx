@@ -1,9 +1,11 @@
 
 import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
-import { FoodItem, Device, DailyMealGroup, MealEntry, MealType } from '../types';
-import { MOCK_FOOD_ITEMS, MOCK_DEVICES, MOCK_DAILY_MEALS_TODAY } from '../constants';
+import { FoodItem, Device, DailyMealGroup, MealEntry, MealType, User } from '../types';
+import { MOCK_FOOD_ITEMS, MOCK_DEVICES, MOCK_DAILY_MEALS_TODAY, MOCK_USER } from '../constants';
 
 interface AppContextType {
+  userProfile: User;
+  updateUserProfile: (profile: User) => void;
   userMeals: DailyMealGroup[];
   addMealEntry: (mealType: MealType, foodItem: FoodItem, quantity: number) => void;
   devices: Device[];
@@ -17,9 +19,14 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [userProfile, setUserProfile] = useState<User>(MOCK_USER);
   const [userMeals, setUserMeals] = useState<DailyMealGroup[]>(MOCK_DAILY_MEALS_TODAY);
   const [devices, setDevices] = useState<Device[]>(MOCK_DEVICES);
   const allFoodItems = MOCK_FOOD_ITEMS;
+
+  const updateUserProfile = useCallback((profile: User) => {
+    setUserProfile(profile);
+  }, []);
 
   const addMealEntry = useCallback((mealType: MealType, foodItem: FoodItem, quantity: number) => {
     setUserMeals(prevMeals => {
@@ -76,7 +83,7 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children
 
 
   return (
-    <AppContext.Provider value={{ userMeals, addMealEntry, devices, connectDevice, disconnectDevice, allFoodItems, getFoodItemById, getDeviceById }}>
+    <AppContext.Provider value={{ userProfile, updateUserProfile, userMeals, addMealEntry, devices, connectDevice, disconnectDevice, allFoodItems, getFoodItemById, getDeviceById }}>
       {children}
     </AppContext.Provider>
   );

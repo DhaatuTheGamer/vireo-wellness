@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeftIcon, WifiIcon, BatteryIcon } from './Icons';
+import { ChevronLeft, Wifi, BatteryFull } from 'lucide-react';
 
 interface HeaderProps {
-  title: string;
+  title: React.ReactNode;
   showBackButton?: boolean;
-  backPath?: string;
+  backPath?: string | number;
   rightContent?: React.ReactNode;
 }
 
@@ -22,25 +22,28 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false, backPath
   };
 
   return (
-    <div className="p-4 flex items-center justify-between bg-slate-800 sticky top-0 z-10 h-16 border-b border-slate-600 transition-colors duration-300">
-      <div className="flex items-center">
+    <header className="px-6 py-5 flex items-center justify-between bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-800/50 transition-colors duration-300">
+      <div className="flex items-center gap-3">
         {showBackButton && (
-          <button onClick={handleBack} className="mr-3 p-1 text-slate-300 hover:text-slate-100 transition-colors duration-150">
-            <ChevronLeftIcon className="w-6 h-6" />
+          <button 
+            onClick={handleBack} 
+            className="p-2 -ml-2 rounded-full bg-slate-800/50 text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-200"
+          >
+            <ChevronLeft className="w-5 h-5" />
           </button>
         )}
-        <h1 className="text-xl font-semibold text-slate-50">{title}</h1>
+        <h1 className="text-xl font-bold tracking-tight text-white">{title}</h1>
       </div>
-      <div className="flex items-center space-x-2 text-xs text-slate-400">
+      <div className="flex items-center gap-3 text-sm font-medium text-slate-400">
         {rightContent ? rightContent : (
-          <>
+          <div className="flex items-center gap-2 bg-slate-800/50 px-3 py-1.5 rounded-full md:hidden">
             <span>11:10</span>
-            <WifiIcon className="w-4 h-4" />
-            <BatteryIcon className="w-5 h-5" level={80} />
-          </>
+            <Wifi className="w-4 h-4" />
+            <BatteryFull className="w-4 h-4" />
+          </div>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 

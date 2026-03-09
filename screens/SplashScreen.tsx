@@ -1,29 +1,40 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { VireoVLeafLogoIcon } from '../components/Icons';
+import { motion } from 'motion/react';
+import { Activity } from 'lucide-react';
 
 const SplashScreen: React.FC = () => {
   const navigate = useNavigate();
 
   const handleContinue = () => {
-    navigate('/dashboard');
+    navigate('/login');
   };
 
   return (
-    <div className="flex flex-col items-center justify-between h-full p-8 bg-slate-800 text-center transition-colors duration-300">
-      <div className="flex-shrink-0 mt-10"> 
-        <div className="flex justify-end items-center w-full text-xs text-slate-400 space-x-2">
-            {/* Intentionally empty or reserved for future status icons */}
-        </div>
-        <h1 className="text-3xl font-bold text-slate-50 mt-8">Vireo</h1>
-      </div>
+    <div className="flex flex-col items-center justify-between h-full p-8 bg-slate-950 text-center relative overflow-hidden flex-1 w-full">
+      {/* Background Gradients */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/20 rounded-full blur-[100px]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-sky-500/20 rounded-full blur-[100px]" />
+
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="flex-shrink-0 mt-12 relative z-10"
+      > 
+        <h1 className="text-4xl font-black text-white tracking-tighter">
+          Vireo<span className="text-emerald-500">.</span>
+        </h1>
+      </motion.div>
       
-      <div className="flex flex-col items-center justify-center flex-grow">
-        <div className="relative flex items-center justify-center w-80 h-80 mb-12">
-          {/* Large Circle - slower, counter-clockwise */}
-          <svg
-            className="absolute w-[240px] h-[240px] text-emerald-800 animate-spin-slow-ccw" 
+      <div className="flex flex-col items-center justify-center flex-1 relative z-10">
+        <div className="relative flex items-center justify-center w-80 h-80">
+          {/* Large Circle */}
+          <motion.svg
+            animate={{ rotate: -360 }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            className="absolute w-[280px] h-[280px] text-emerald-500/20" 
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -34,14 +45,16 @@ const SplashScreen: React.FC = () => {
               cy="50"
               r="48"
               stroke="currentColor"
-              strokeWidth="1.5"
-              strokeDasharray="3 5" 
+              strokeWidth="1"
+              strokeDasharray="4 8" 
             />
-          </svg>
+          </motion.svg>
 
-          {/* Small Circle - faster, clockwise */}
-          <svg
-            className="absolute w-[190px] h-[190px] text-emerald-700 animate-spin-medium-cw" 
+          {/* Small Circle */}
+          <motion.svg
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+            className="absolute w-[220px] h-[220px] text-emerald-400/30" 
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -53,25 +66,39 @@ const SplashScreen: React.FC = () => {
               r="48"
               stroke="currentColor"
               strokeWidth="1.5"
-              strokeDasharray="3 5"
+              strokeDasharray="2 6"
             />
-          </svg>
-          {/* Apply z-index to the logo to ensure it's on top of the circles */}
-          <VireoVLeafLogoIcon className="w-48 h-72 relative z-10" /> 
+          </motion.svg>
+          
+          {/* Center Icon */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.4, type: "spring", stiffness: 200, damping: 20 }}
+            className="w-32 h-32 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl shadow-emerald-500/40 relative z-10"
+          >
+            <Activity className="w-16 h-16 text-slate-950" />
+          </motion.div>
         </div>
       </div>
 
-      <div className="w-full mb-8">
-        <p className="text-slate-300 bg-slate-700 p-4 rounded-lg shadow">
-          Thrive Daily
-        </p>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="w-full mb-8 relative z-10 max-w-md mx-auto"
+      >
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-white mb-2">Thrive Daily</h2>
+          <p className="text-slate-400 text-sm">Monitor your health, track your meals, and stay connected with your devices.</p>
+        </div>
         <button
           onClick={handleContinue}
-          className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-4 px-4 rounded-lg shadow-md transition duration-150 ease-in-out"
+          className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98]"
         >
           Get Started
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -1,48 +1,75 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { HomeIcon, ClipboardListIcon, PlusIcon, DeviceTabletIcon, CogIcon, IconProps } from './Icons';
+import { Home, ClipboardList, Plus, TabletSmartphone, Settings, LineChart } from 'lucide-react';
+import { motion } from 'motion/react';
+import QuickAddModal from './QuickAddModal';
 
 interface NavItemProps {
   to: string;
-  icon: React.ReactElement<IconProps>;
+  icon: React.ElementType;
   label: string;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ to, icon, label }) => {
+const NavItem: React.FC<NavItemProps> = ({ to, icon: Icon, label }) => {
   const location = useLocation();
   const isActive = location.pathname === to || (to === "/dashboard" && location.pathname === "/");
 
   return (
     <NavLink
       to={to}
-      className={`flex flex-col items-center justify-center flex-1 p-2 rounded-lg transition-colors ${
-        isActive ? 'text-emerald-400' : 'text-slate-400 hover:text-emerald-400'
+      className={`relative flex flex-col md:flex-row md:justify-start md:px-6 items-center justify-center flex-1 md:flex-none py-3 md:py-4 transition-colors duration-300 ${
+        isActive ? 'text-emerald-400 md:bg-emerald-500/10' : 'text-slate-500 hover:text-slate-300 md:hover:bg-slate-800/50'
       }`}
     >
-      {React.cloneElement(icon, { className: `w-6 h-6 mb-1 ${isActive ? 'text-emerald-400' : ''}` })}
-      <span className="text-xs">{label}</span>
+      {isActive && (
+        <motion.div 
+          layoutId="nav-indicator"
+          className="absolute top-0 md:top-auto md:left-0 w-8 h-1 md:w-1 md:h-full bg-emerald-500 rounded-b-full md:rounded-b-none md:rounded-r-full"
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        />
+      )}
+      <Icon className={`w-6 h-6 mb-1 md:mb-0 md:mr-4 ${isActive ? 'stroke-[2.5px]' : 'stroke-2'}`} />
+      <span className="text-[10px] md:text-sm font-medium tracking-wide">{label}</span>
     </NavLink>
   );
 };
 
 const BottomNav: React.FC = () => {
+  const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
+
   return (
-    <div className="bg-slate-700 shadow-t sticky bottom-0 z-10 border-t border-slate-600 transition-colors duration-300">
-      <div className="max-w-md mx-auto h-16 flex justify-around items-center px-2">
-        <NavItem to="/dashboard" icon={<HomeIcon />} label="Home" />
-        <NavItem to="/daily-meals" icon={<ClipboardListIcon />} label="Meals" />
-        <NavLink
-          to="/add-meal"
-          className="flex items-center justify-center w-14 h-14 bg-emerald-500 rounded-full text-white shadow-lg hover:bg-emerald-600 transform active:scale-95 transition-transform -mt-6"
-          aria-label="Add Meal"
-        >
-          <PlusIcon className="w-7 h-7" />
-        </NavLink>
-        <NavItem to="/devices" icon={<DeviceTabletIcon />} label="Devices" />
-        <NavItem to="/settings" icon={<CogIcon />} label="Settings" />
+    <>
+      <div className="bg-slate-900/90 backdrop-blur-xl sticky bottom-0 z-40 border-t border-slate-800/50 pb-safe md:static md:w-64 md:border-t-0 md:border-r md:h-full md:flex-shrink-0 order-2 md:order-1">
+        <div className="max-w-md md:max-w-none mx-auto flex md:flex-col justify-around md:justify-start items-center md:items-stretch px-2 md:px-0 relative md:pt-8 md:gap-2 h-full">
+          <div className="hidden md:flex items-center px-6 mb-8">
+            <div className="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center mr-3">
+              <span className="text-white font-bold text-lg">V</span>
+            </div>
+            <span className="text-xl font-bold text-white tracking-tight">Vireo</span>
+          </div>
+
+          <NavItem to="/dashboard" icon={Home} label="Home" />
+          <NavItem to="/insights" icon={LineChart} label="Insights" />
+          <NavItem to="/daily-meals" icon={ClipboardList} label="Meals" />
+          
+          <div className="flex-1 md:flex-none flex justify-center md:justify-start md:px-6 -mt-6 md:mt-4 md:mb-4">
+            <button
+              onClick={() => setIsQuickAddOpen(true)}
+              className="flex items-center justify-center md:justify-start md:px-4 w-14 h-14 md:w-full md:h-12 bg-emerald-500 rounded-2xl text-white shadow-xl shadow-emerald-500/30 hover:bg-emerald-400 hover:scale-105 active:scale-95 transition-all duration-300"
+              aria-label="Quick Add"
+            >
+              <Plus className="w-7 h-7 md:w-5 md:h-5 stroke-[2.5px] md:mr-2" />
+              <span className="hidden md:inline font-semibold">Quick Add</span>
+            </button>
+          </div>
+
+          <NavItem to="/devices" icon={TabletSmartphone} label="Devices" />
+          <NavItem to="/settings" icon={Settings} label="Settings" />
+        </div>
       </div>
-    </div>
+      <QuickAddModal isOpen={isQuickAddOpen} onClose={() => setIsQuickAddOpen(false)} />
+    </>
   );
 };
 
