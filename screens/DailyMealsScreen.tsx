@@ -80,10 +80,14 @@ const DailyMealsScreen: React.FC = () => {
 
   const totalCaloriesToday = userMeals.reduce((sum, group) => sum + group.totalCalories, 0);
   
-  const lastAddedTime = userMeals
-    .flatMap(group => group.entries)
-    .map(entry => new Date(entry.loggedAt))
-    .sort((a,b) => b.getTime() - a.getTime())[0];
+  const maxTimestampStr = userMeals.reduce((maxGroup, group) => {
+    const maxEntry = group.entries.reduce((max, entry) => {
+      return entry.loggedAt > max ? entry.loggedAt : max;
+    }, "");
+    return maxEntry > maxGroup ? maxEntry : maxGroup;
+  }, "");
+
+  const lastAddedTime = maxTimestampStr ? new Date(maxTimestampStr) : undefined;
 
   const handleAddFoodToMeal = (mealType: MealType) => {
      navigate('/add-meal', { state: { targetMealType: mealType, selectedDate: selectedDate.toISOString() } });
