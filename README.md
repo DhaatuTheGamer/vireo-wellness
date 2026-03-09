@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./public/favicon.png" alt="Vireo Logo" width="120" />
+</p>
+
 # Vireo - Thrive Daily
 
 ![Vireo Banner](https://img.shields.io/badge/Vireo-Thrive_Daily-10b981?style=for-the-badge&logo=react&logoColor=white)
