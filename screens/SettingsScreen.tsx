@@ -7,6 +7,7 @@ import BottomNav from '../components/BottomNav';
 import { Settings, Activity, Scale, Bell, Shield, LogOut, ChevronRight, User, Mail, Phone, Edit2, Check, ChevronDown, Download, Clock, Droplet, Pill, Trash2, Plus } from 'lucide-react';
 import { Reminder } from '../types';
 import { useAppContext } from '../contexts/AppContext';
+import { isValidEmail } from '../utils/validators';
 
 const COUNTRIES = [
   { code: 'US', isd: '+1', name: 'United States' },
@@ -50,8 +51,7 @@ const SettingsScreen: React.FC = () => {
   };
 
   const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       setEmailError('Please enter a valid email address');
       return false;
     }
