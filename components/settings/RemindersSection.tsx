@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Bell, Shield, ChevronRight, Droplet, Pill, Activity, Trash2, Plus } from 'lucide-react';
+import { Bell, Shield, Activity, ChevronRight, Droplet, Pill, Trash2, Plus } from 'lucide-react';
 import { Reminder } from '../../types';
 import { useAppContext } from '../../contexts/AppContext';
 
