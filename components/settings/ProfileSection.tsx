@@ -92,6 +92,7 @@ const ProfileSection: React.FC = () => {
               <input
                 type="text"
                 value={profileData.name}
+                maxLength={50}
                 onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
                 className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-emerald-500"
               />
@@ -112,6 +113,7 @@ const ProfileSection: React.FC = () => {
                 <input
                   type="email"
                   value={profileData.email}
+                  maxLength={100}
                   onChange={(e) => {
                     const newEmail = e.target.value;
                     setProfileData({ ...profileData, email: newEmail });

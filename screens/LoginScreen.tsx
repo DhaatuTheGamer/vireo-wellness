@@ -72,6 +72,7 @@ const LoginScreen: React.FC = () => {
                 type="text"
                 id="name"
                 value={name}
+                maxLength={50}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full bg-slate-900 border border-slate-800 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
                 placeholder="Rohit Kumar"
