@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Header from '../components/Header';
@@ -11,9 +11,13 @@ const AddMedicationScreen: React.FC = () => {
     const { allMedications, logMedication } = useAppContext();
     const [searchQuery, setSearchQuery] = useState('');
 
-    const filteredMedications = allMedications.filter(med =>
-        med.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    // ⚡ Bolt: Wrap filtering in useMemo and hoist toLowerCase to prevent unnecessary recalculations on every render
+    const filteredMedications = useMemo(() => {
+        const lowerSearchQuery = searchQuery.toLowerCase();
+        return allMedications.filter(med =>
+            med.name.toLowerCase().includes(lowerSearchQuery)
+        );
+    }, [allMedications, searchQuery]);
 
     const handleLogMedication = (medication: Medication) => {
         logMedication(medication);
