@@ -9,7 +9,7 @@ const SignOutSection: React.FC = () => {
   const { updateUserProfile } = useAppContext();
 
   const handleSignOut = () => {
-    updateUserProfile({ name: '', email: '', phone: '', countryCode: 'IN' });
+    updateUserProfile({ name: '', email: '', phone: '', countryCode: 'US' });
     navigate('/');
   };
 
