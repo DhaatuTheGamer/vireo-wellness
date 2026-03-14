@@ -24,13 +24,12 @@ function runOptimized() {
     const datesArray = [];
     const centerDate = new Date();
 
-    // Instead of using addDays from date-fns which clones the date and uses full date logic
-    // we can do simple timestamp addition
-    const centerTimestamp = centerDate.getTime();
-    const DAY_IN_MS = 24 * 60 * 60 * 1000;
+    const year = centerDate.getFullYear();
+    const month = centerDate.getMonth();
+    const date = centerDate.getDate();
 
     for (let i = -10; i <= 10; i++) {
-      datesArray.push(new Date(centerTimestamp + i * DAY_IN_MS));
+      datesArray.push(new Date(year, month, date + i));
     }
     totalDates += datesArray.length;
   }
@@ -41,6 +40,6 @@ function runOptimized() {
 const baselineTime = runBaseline();
 const optimizedTime = runOptimized();
 
-console.log(`Baseline: ${baselineTime.toFixed(2)}ms`);
-console.log(`Optimized: ${optimizedTime.toFixed(2)}ms`);
+console.log(`Baseline (addDays): ${baselineTime.toFixed(2)}ms`);
+console.log(`Optimized (new Date(y, m, d)): ${optimizedTime.toFixed(2)}ms`);
 console.log(`Improvement: ${((baselineTime - optimizedTime) / baselineTime * 100).toFixed(2)}% faster`);

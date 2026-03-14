@@ -1,5 +1,3 @@
-## 2024-05-24 - Object Accumulation Efficiency
-
-**Learning:** When converting an array to a map (keyed object) in TypeScript, a standard `for` loop is significantly faster than using `.reduce()`. While `.reduce()` is often preferred for functional programming readability, its callback overhead causes noticeable performance delays in tight loops or frequent recalculations (like those triggered by `useMemo` in React). Using `Object.fromEntries` combined with `.map()` is even slower due to the allocation of intermediate tuple arrays.
-
-**Action:** Whenever a map/dictionary needs to be constructed from an array for quick lookups, specifically within performance-sensitive components, prioritize a standard `for` loop over `.reduce()`. It maintains the same functionality while avoiding callback overhead.
+## 2024-05-24 - Optimizing Date Generation and Comparisons in Loops
+**Learning:** `date-fns` functions like `addDays` and `isSameDay` introduce significant overhead when called repeatedly inside frequent component renders or loops (like `.map`). This is due to internal cloning and full date logic calculations.
+**Action:** When generating sequential dates, extract the year, month, and date integers once and use native math `new Date(year, month, date + i)` instead of `addDays`. When comparing dates inside a loop, extract the target year, month, and date integers *outside* the loop and perform direct manual integer comparisons (`===`) *inside* the loop instead of `isSameDay`.
