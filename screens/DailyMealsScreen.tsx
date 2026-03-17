@@ -120,7 +120,7 @@ const DailyMealsScreen: React.FC = () => {
           showBackButton
           backPath="/dashboard"
           rightContent={
-            <button className="p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200">
+            <button aria-label="Select Date" className="p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200">
               <Calendar className="w-5 h-5" />
             </button>
           }
