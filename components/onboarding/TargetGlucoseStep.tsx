@@ -16,6 +16,7 @@ export const TargetGlucoseStep = ({ targetGlucose, setTargetGlucose }: TargetGlu
         </div>
         <input
           type="range"
+          aria-label="Minimum Target Glucose"
           min="60" max="100"
           value={targetGlucose[0]}
           onChange={(e) => setTargetGlucose([parseInt(e.target.value), targetGlucose[1]])}
@@ -28,6 +29,7 @@ export const TargetGlucoseStep = ({ targetGlucose, setTargetGlucose }: TargetGlu
         </div>
         <input
           type="range"
+          aria-label="Maximum Target Glucose"
           min="100" max="200"
           value={targetGlucose[1]}
           onChange={(e) => setTargetGlucose([targetGlucose[0], parseInt(e.target.value)])}

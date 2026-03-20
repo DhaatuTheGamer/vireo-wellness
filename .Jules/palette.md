@@ -1,4 +1,4 @@
-## 2024-03-19 - Explicit Button Types
+## 2024-03-21 - Input Slider Labels
 
-**Learning:** Buttons in HTML default to `type="submit"`. In a component-based architecture like React, when buttons are used generically (e.g. for navigating, mapping items, opening modals) but are later wrapped in a `<form>` component (or rendered inside one), they can unintentionally trigger full-page reloads or unwanted form submissions.
-**Action:** Always explicitly define `type="button"` for action buttons that are strictly meant for JavaScript/React interaction rather than form submission, improving resilience against unexpected behaviors.
+**Learning:** When using `<input type="range">` elements, developers often place raw text spans near the slider to indicate what it is (e.g., "Min" or "Max") instead of a proper `<label>`. This causes the screen reader to only announce "slider", leaving visually impaired users guessing its purpose.
+**Action:** Always provide an explicit `aria-label` (e.g., `aria-label="Minimum Target Glucose"`) on raw input sliders that are visually labeled by disconnected elements to ensure full screen reader support.

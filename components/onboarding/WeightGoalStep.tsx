@@ -18,6 +18,7 @@ export const WeightGoalStep = ({ weightGoal, setWeightGoal }: WeightGoalStepProp
           { id: 'gain', label: 'Gain Weight', desc: 'Caloric surplus' }
         ].map((goal) => (
           <button
+            type="button"
             key={goal.id}
             onClick={() => setWeightGoal(goal.id)}
             className={`w-full p-4 rounded-2xl border text-left transition-all ${weightGoal === goal.id ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-700'}`}
