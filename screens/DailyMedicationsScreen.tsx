@@ -38,7 +38,7 @@ const DailyMedicationsScreen: React.FC = () => {
                     showBackButton
                     backPath="/dashboard"
                     rightContent={
-                        <button aria-label="Select Date" className="p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200">
+                        <button aria-label="Select Date" className="p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
                             <Calendar className="w-5 h-5" />
                         </button>
                     }
@@ -112,7 +112,7 @@ const DailyMedicationsScreen: React.FC = () => {
                     >
                         <button
                             onClick={() => navigate('/add-medication')}
-                            className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 px-4 rounded-2xl shadow-xl shadow-cyan-900/50 transition-all duration-300 active:scale-[0.98] flex items-center justify-center"
+                            className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 px-4 rounded-2xl shadow-xl shadow-cyan-900/50 transition-all duration-300 active:scale-[0.98] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                         >
                             <Plus className="w-5 h-5 mr-2 stroke-[3px]" />
                             Log Medication
