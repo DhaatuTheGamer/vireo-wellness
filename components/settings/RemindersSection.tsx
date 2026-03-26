@@ -44,6 +44,7 @@ const ReminderItem = ({ reminder, onToggle, onDelete }: ReminderItemProps) => (
     </div>
     <div className="flex items-center gap-4">
       <button
+        type="button"
         onClick={() => onDelete(reminder.id)}
         className="text-slate-500 hover:text-rose-400 transition-colors md:opacity-0 group-hover:opacity-100 focus:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md p-2"
         aria-label="Delete reminder"
@@ -51,6 +52,7 @@ const ReminderItem = ({ reminder, onToggle, onDelete }: ReminderItemProps) => (
         <Trash2 className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={() => onToggle(reminder.id)}
         className={`w-10 h-5 rounded-full transition-colors duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${reminder.isActive ? 'bg-emerald-500' : 'bg-slate-700'}`}
         aria-label={reminder.isActive ? "Deactivate reminder" : "Activate reminder"}
@@ -148,6 +150,7 @@ const RemindersSection = () => {
             </span>
           </div>
           <button
+            type="button"
             onClick={() => setNotifications(!notifications)}
             className={`w-12 h-6 rounded-full transition-colors duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${notifications ? 'bg-emerald-500' : 'bg-slate-700'}`}
             aria-label={notifications ? "Disable push notifications" : "Enable push notifications"}
@@ -172,6 +175,7 @@ const RemindersSection = () => {
           />
         ) : (
           <button
+            type="button"
             onClick={() => setIsAddingReminder(true)}
             className="w-full p-4 flex items-center justify-center border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors text-emerald-400 text-sm font-semibold gap-2"
           >
@@ -180,6 +184,7 @@ const RemindersSection = () => {
         )}
 
         <button
+          type="button"
           onClick={() => navigate('/privacy-security')}
           className="w-full p-4 flex items-center justify-between hover:bg-slate-800/50 transition-colors"
         >
