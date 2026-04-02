@@ -128,11 +128,12 @@ const DevicesScreen: React.FC = () => {
         )}
         
         {devices.length === 0 && (
-            <div className="flex flex-col items-center justify-center pt-12 text-center">
-              <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mb-4">
-                <Watch className="w-8 h-8 text-slate-600" />
+            <div className="flex flex-col items-center justify-center pt-16 pb-8 text-center px-4">
+              <div className="w-20 h-20 bg-slate-800/50 rounded-full flex items-center justify-center mb-5 border border-slate-700/50 shadow-inner">
+                <Watch className="w-10 h-10 text-slate-500" />
               </div>
-              <p className="text-slate-400 font-medium">No devices found</p>
+              <p className="text-lg text-white font-semibold mb-2">No devices connected</p>
+              <p className="text-slate-400 text-sm max-w-[260px] leading-relaxed">Connect a health tracker or continuous glucose monitor to automatically sync your daily vitals.</p>
             </div>
         )}
 
