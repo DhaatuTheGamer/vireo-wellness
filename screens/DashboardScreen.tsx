@@ -170,13 +170,14 @@ const DashboardScreen: React.FC = () => {
           rightContent={
             <div className="flex items-center gap-2">
               <button
+                type="button"
                 onClick={() => setIsCustomizeOpen(true)}
                 className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                 aria-label="Customize Dashboard"
               >
                 <Settings2 className="w-5 h-5" />
               </button>
-              <button className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" aria-label="Notifications">
+              <button type="button" className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" aria-label="Notifications">
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full border-2 border-slate-900"></span>
               </button>
@@ -204,13 +205,13 @@ const DashboardScreen: React.FC = () => {
             transition={{ delay: 0.7, duration: 0.4 }}
             className="space-y-3 mt-6"
           >
-            <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
+            <button type="button" className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-slate-200 group-hover:text-white">Select a day</span>
                 <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
               </div>
             </button>
-            <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
+            <button type="button" className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-slate-200 group-hover:text-white">Yesterday</span>
                 <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />

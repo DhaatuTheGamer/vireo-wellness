@@ -27,6 +27,7 @@ const InsightsScreen: React.FC = () => {
           {/* Timeframe Toggle */}
           <div className="flex bg-slate-900 rounded-2xl p-1 border border-slate-800" role="group" aria-label="Timeframe selection">
             <button
+              type="button"
               onClick={() => setTimeframe('weekly')}
               aria-pressed={timeframe === 'weekly'}
               className={`flex-1 py-2 text-sm font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${timeframe === 'weekly' ? 'bg-emerald-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
@@ -34,6 +35,7 @@ const InsightsScreen: React.FC = () => {
               Weekly
             </button>
             <button
+              type="button"
               onClick={() => setTimeframe('monthly')}
               aria-pressed={timeframe === 'monthly'}
               className={`flex-1 py-2 text-sm font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${timeframe === 'monthly' ? 'bg-emerald-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}

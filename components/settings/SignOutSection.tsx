@@ -10,8 +10,10 @@ const SignOutSection: React.FC = () => {
   const [isConfirming, setIsConfirming] = useState(false);
 
   const handleSignOut = () => {
-    updateUserProfile({ name: '', email: '', phone: '', countryCode: 'US' });
-    navigate('/');
+    if (window.confirm("Are you sure you want to sign out?")) {
+      updateUserProfile({ name: '', email: '', phone: '', countryCode: 'US' });
+      navigate('/');
+    }
   };
 
   return (
