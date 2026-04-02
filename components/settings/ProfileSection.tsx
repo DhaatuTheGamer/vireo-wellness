@@ -89,6 +89,7 @@ export default function ProfileSection() {
         <button
           onClick={isEditingProfile ? handleSaveProfile : () => setIsEditingProfile(true)}
           disabled={isEditingProfile && (profileData.phone.length !== 10 || !!emailError)}
+          title={isEditingProfile && (profileData.phone.length !== 10 || !!emailError) ? "Please enter a valid 10-digit phone number and email address" : undefined}
           className="text-xs font-bold text-emerald-500 flex items-center gap-1 hover:text-emerald-400 disabled:text-slate-500 transition-colors"
         >
           {isEditingProfile ? (
