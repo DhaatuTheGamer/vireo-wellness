@@ -1,36 +1,46 @@
+import os
 from playwright.sync_api import sync_playwright
-import time
 
-def verify_ux_changes():
+def verify_buttons():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         page.set_viewport_size({"width": 1280, "height": 800})
 
-        # Bypass onboarding properly
+        # Setup bypass for onboarding
         page.goto("http://localhost:3000/")
-        page.evaluate("window.localStorage.setItem('hasCompletedOnboarding', 'true')")
-        page.evaluate("window.localStorage.setItem('isLoggedIn', 'true')")
-        page.evaluate("window.localStorage.setItem('userProfile', JSON.stringify({'name':'Rohit Kumar','phone':'0000000000','countryCode':'US'}))")
+        page.evaluate("""() => {
+            window.localStorage.setItem('hasCompletedOnboarding', 'true');
+            window.localStorage.setItem('isLoggedIn', 'true');
+            window.localStorage.setItem('userProfile', JSON.stringify({
+                name: 'Rohit Kumar',
+                phone: '0000000000',
+                countryCode: 'US'
+            }));
+        }""")
         page.reload()
 
-        time.sleep(1)
+        # Dashboard Screen
         page.goto("http://localhost:3000/#/dashboard")
+        page.wait_for_selector("text=Select a day")
+        page.screenshot(path="dashboard_buttons.png")
 
-        # Wait a moment for rendering
-        time.sleep(2)
+        # Insights Screen
+        page.goto("http://localhost:3000/#/insights")
+        page.wait_for_selector("text=Weekly")
+        page.screenshot(path="insights_buttons.png")
 
-        # Take a screenshot of the main dashboard, which includes the Water and Chart widgets
-        page.screenshot(path="/app/dashboard_widgets.png")
+        # Daily Meals Screen
+        page.goto("http://localhost:3000/#/daily-meals")
+        page.wait_for_selector("text=Add New Meal")
+        page.screenshot(path="meals_buttons.png")
 
-        # Open the Customize Dashboard Modal
-        settings_button = page.locator("button[aria-label='Customize Dashboard']")
-        if settings_button.count() > 0:
-            settings_button.click()
-            time.sleep(1)
-            page.screenshot(path="/app/customize_modal.png")
+        # Add Meal Screen
+        page.goto("http://localhost:3000/#/add-meal")
+        page.wait_for_selector("input[placeholder='Search food...']")
+        page.screenshot(path="add_meal_buttons.png")
 
         browser.close()
 
 if __name__ == "__main__":
-    verify_ux_changes()
+    verify_buttons()

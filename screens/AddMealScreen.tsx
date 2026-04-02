@@ -78,6 +78,7 @@ const CategoryTabs = ({ tabs, activeTab, onTabSelect }: CategoryTabsProps) => (
     <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-1">
       {tabs.map(tab => (
         <button
+          type="button"
           key={tab}
           type="button"
           onClick={() => onTabSelect(tab)}
