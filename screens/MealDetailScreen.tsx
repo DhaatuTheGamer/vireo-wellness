@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import Header from '../components/Header';
 import { useAppContext } from '../contexts/AppContext';
 import { FoodItem, MealType } from '../types';
-import { Flame, Wheat, Droplet, Beef } from 'lucide-react';
+import { Flame, Wheat, Droplet, Beef, Loader2 } from 'lucide-react';
 
 const MealDetailScreen: React.FC = () => {
   const { foodId } = useParams<{ foodId: string }>();
@@ -37,7 +37,12 @@ const MealDetailScreen: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-full bg-slate-950 text-slate-100">Loading...</div>;
+    return (
+      <div className="flex flex-col justify-center items-center h-full bg-slate-950 text-slate-400" aria-live="polite" aria-busy="true">
+        <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mb-4" />
+        <span className="text-sm font-medium">Loading meal details...</span>
+      </div>
+    );
   }
 
   if (!foodItem) {
