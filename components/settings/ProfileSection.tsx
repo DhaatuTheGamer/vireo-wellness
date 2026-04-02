@@ -87,6 +87,7 @@ export default function ProfileSection() {
       <div className="flex items-center justify-between mb-4 px-1">
         <h2 className="text-xs font-bold uppercase tracking-widest text-slate-500">Profile</h2>
         <button
+          type="button"
           onClick={isEditingProfile ? handleSaveProfile : () => setIsEditingProfile(true)}
           disabled={isEditingProfile && (profileData.phone.length !== 10 || !!emailError)}
           title={isEditingProfile && (profileData.phone.length !== 10 || !!emailError) ? "Please enter a valid 10-digit phone number and email address" : undefined}
