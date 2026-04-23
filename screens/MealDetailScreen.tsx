@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import { useAppContext } from '../contexts/AppContext';
 import { FoodItem, MealType } from '../types';
@@ -66,7 +66,7 @@ const MealDetailScreen: React.FC = () => {
             alt={foodItem.name} 
             className="w-full h-full object-cover" 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/40 to-transparent" />
         </motion.div>
 
         <div className="px-5 -mt-12 relative z-10 max-w-4xl mx-auto">
@@ -120,7 +120,7 @@ const MealDetailScreen: React.FC = () => {
       <motion.div 
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-slate-950 via-slate-950 to-transparent pt-12 pb-safe md:static md:bg-none md:p-5 md:pt-0"
+        className="absolute bottom-0 left-0 right-0 p-5 bg-linear-to-t from-slate-950 via-slate-950 to-transparent pt-12 pb-safe md:static md:bg-none md:p-5 md:pt-0"
       >
         <button
           onClick={handleAddMeal}

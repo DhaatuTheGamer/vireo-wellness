@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { AppContextProvider, useAppContext } from './AppContext';
+import { AppContextProvider, useAppContext } from '../../contexts/AppContext';
 import { ReactNode } from 'react';
 
 describe('AppContext - setWaterIntake', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, Utensils, Activity, Pill } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

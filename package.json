@@ -1,17 +1,20 @@
 {
   "name": "vireo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Dhaatrik Chowdhury",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint ."
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "framer-motion": "^12.38.0",
     "lucide-react": "^0.577.0",
     "motion": "^12.35.1",
     "react": "^19.1.0",
@@ -21,6 +24,7 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.2.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -28,9 +32,15 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "jsdom": "^29.0.2",
     "playwright": "^1.58.2",
     "tailwindcss": "^4.2.1",
     "typescript": "~5.8.2",
+    "typescript-eslint": "^8.59.0",
     "vite": "^6.2.0",
     "vitest": "^4.0.18"
   }

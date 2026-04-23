@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ArrowRight, User, Phone, ChevronDown } from 'lucide-react';
 import { useAppContext } from '../contexts/AppContext';
 import { formatPhoneNumber } from '../utils/validation';
@@ -48,7 +48,7 @@ const LoginScreen: React.FC = () => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex-shrink-0 mt-12 mb-8 relative z-10 max-w-md mx-auto w-full"
+        className="shrink-0 mt-12 mb-8 relative z-10 max-w-md mx-auto w-full"
       >
         <h1 className="text-3xl font-bold text-white mb-2">Welcome</h1>
         <p className="text-slate-400">Please enter your details to continue.</p>

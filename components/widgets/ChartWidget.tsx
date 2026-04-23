@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import BloodSugarChart from '../BloodSugarChart';
 
 import { BloodSugarReading } from '../../types';

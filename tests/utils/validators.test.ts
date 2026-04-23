@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidEmail, isValidWidgetConfigArray } from './validators';
+import { isValidEmail, isValidWidgetConfigArray } from '../../utils/validators';
 
 describe('isValidEmail', () => {
   it('should return true for valid email addresses', () => {

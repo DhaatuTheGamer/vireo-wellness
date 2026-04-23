@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Testing and Linting
+coverage
+.eslintcache
+
+# Environments
+.env
+.env.*
+!.env.example
