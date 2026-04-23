@@ -1,13 +1,14 @@
 
-import React, { createContext, useState, useContext, useCallback, useMemo } from 'react';
+import React, { createContext, useState, useContext, useCallback, useMemo, useEffect } from 'react';
 import { FoodItem, Device, DailyMealGroup, MealEntry, MealType, User, Medication, MedicationEntry, Reminder } from '../types';
 import { MOCK_FOOD_ITEMS, MOCK_DEVICES, MOCK_DAILY_MEALS_TODAY, MOCK_USER, MOCK_MEDICATIONS, MOCK_MEDICATION_ENTRIES, MOCK_REMINDERS, MOCK_DASHBOARD_STATS } from '../constants';
+import * as mealService from '../services/mealService';
 
 interface AppContextType {
   userProfile: User;
   updateUserProfile: (profile: User) => void;
   userMeals: DailyMealGroup[];
-  addMealEntry: (mealType: MealType, foodItem: FoodItem, quantity: number) => void;
+  addMealEntry: (mealType: MealType, foodItem: FoodItem, quantity: number) => Promise<void>;
   devices: Device[];
   connectDevice: (deviceId: string) => void;
   disconnectDevice: (deviceId: string) => void;
@@ -29,7 +30,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userProfile, setUserProfile] = useState<User>(MOCK_USER);
-  const [userMeals, setUserMeals] = useState<DailyMealGroup[]>(MOCK_DAILY_MEALS_TODAY);
+  const [userMeals, setUserMeals] = useState<DailyMealGroup[]>([]);
   const [devices, setDevices] = useState<Device[]>(MOCK_DEVICES);
   const [waterIntake, setWaterIntakeState] = useState<number>(MOCK_DASHBOARD_STATS.waterIntake);
   const [medicationEntries, setMedicationEntries] = useState<MedicationEntry[]>(MOCK_MEDICATION_ENTRIES);
@@ -37,6 +38,21 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
   const allFoodItems = MOCK_FOOD_ITEMS;
   const allMedications = MOCK_MEDICATIONS;
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        const today = new Date().toISOString().split('T')[0];
+        const meals = await mealService.getMeals(today);
+        setUserMeals(meals);
+      } catch (error) {
+        console.error('Failed to fetch meals:', error);
+        // Fallback to mock data if API fails
+        setUserMeals(MOCK_DAILY_MEALS_TODAY);
+      }
+    };
+    fetchMeals();
+  }, []);
 
   const foodItemMap = useMemo(() => {
     const map = new Map<string, FoodItem>();
@@ -60,37 +76,48 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
     setUserProfile(profile);
   }, []);
 
-  const addMealEntry = useCallback((mealType: MealType, foodItem: FoodItem, quantity: number) => {
-    setUserMeals(prevMeals => {
-      const newEntry: MealEntry = {
-        id: `me-${crypto.randomUUID()}`,
-        foodItem,
+  const addMealEntry = useCallback(async (mealType: MealType, foodItem: FoodItem, quantity: number) => {
+    try {
+      await mealService.logMeal({
+        foodItemId: foodItem.id,
         quantity,
-        loggedAt: new Date().toISOString(),
-      };
+        mealType,
+      });
 
-      const existingGroup = prevMeals.find(group => group.mealType === mealType);
-      if (existingGroup) {
-        return prevMeals.map(group =>
-          group.mealType === mealType
-            ? {
-              ...group,
-              entries: [...group.entries, newEntry],
-              totalCalories: group.totalCalories + foodItem.calories * quantity,
-            }
-            : group
-        );
-      } else {
-        return [
-          ...prevMeals,
-          {
-            mealType,
-            entries: [newEntry],
-            totalCalories: foodItem.calories * quantity,
-          },
-        ];
-      }
-    });
+      setUserMeals(prevMeals => {
+        const newEntry: MealEntry = {
+          id: `me-${crypto.randomUUID()}`,
+          foodItem,
+          quantity,
+          loggedAt: new Date().toISOString(),
+        };
+
+        const existingGroup = prevMeals.find(group => group.mealType === mealType);
+        if (existingGroup) {
+          return prevMeals.map(group =>
+            group.mealType === mealType
+              ? {
+                ...group,
+                entries: [...group.entries, newEntry],
+                totalCalories: group.totalCalories + foodItem.calories * quantity,
+              }
+              : group
+          );
+        } else {
+          return [
+            ...prevMeals,
+            {
+              mealType,
+              entries: [newEntry],
+              totalCalories: foodItem.calories * quantity,
+            },
+          ];
+        }
+      });
+    } catch (error) {
+      console.error('Failed to log meal:', error);
+      throw error;
+    }
   }, []);
 
   const connectDevice = useCallback((deviceId: string) => {

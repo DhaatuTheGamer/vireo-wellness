@@ -13,9 +13,10 @@ interface SelectionBarProps {
   numSelected: number;
   totalSelectedCalories: number;
   onAdd: () => void;
+  isSubmitting: boolean;
 }
 
-const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd }: SelectionBarProps) => (
+const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd, isSubmitting }: SelectionBarProps) => (
   <AnimatePresence>
     {numSelected > 0 && (
       <motion.div
@@ -27,15 +28,16 @@ const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd }: SelectionBa
         <button
           type="button"
           onClick={onAdd}
-          className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-between"
+          disabled={isSubmitting}
+          className={`w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-between ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
         >
           <div className="flex items-center">
-            <div className="bg-slate-950/20 px-3 py-1 rounded-lg mr-3">
-              {numSelected}
+            <div className="bg-slate-950/20 px-3 py-1 rounded-lg mr-3 min-w-8 flex justify-center">
+              {isSubmitting ? '...' : numSelected}
             </div>
-            <span>Add Selected</span>
+            <span>{isSubmitting ? 'Adding...' : 'Add Selected'}</span>
           </div>
-          <span className="bg-slate-950/10 px-3 py-1 rounded-lg">{totalSelectedCalories} kcal</span>
+          {!isSubmitting && <span className="bg-slate-950/10 px-3 py-1 rounded-lg">{totalSelectedCalories} kcal</span>}
         </button>
       </motion.div>
     )}
@@ -190,6 +192,7 @@ const AddMealScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<TabName>("Meals");
   const [selectedItems, setSelectedItems] = useState<Record<string, SelectedFoodItem>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // ⚡ Bolt: Pre-compute lower-case names to avoid expensive string transformations on every search keystroke.
   const allFoodItemsWithLower = useMemo(() => {
@@ -240,16 +243,22 @@ const AddMealScreen = () => {
   const numSelected = selectedFoodItemsList.length;
   const totalSelectedCalories = selectedFoodItemsList.reduce((sum, item) => sum + item.calories, 0);
 
-  const handleAddSelectedItems = () => {
-    if (numSelected === 0) return;
+  const handleAddSelectedItems = async () => {
+    if (numSelected === 0 || isSubmitting) return;
     
-    const mealTypeToAdd = targetMealTypeFromState || MealType.SNACK; 
+    setIsSubmitting(true);
+    try {
+      const mealTypeToAdd = targetMealTypeFromState || MealType.SNACK; 
 
-    selectedFoodItemsList.forEach(item => {
-      addMealEntry(mealTypeToAdd, item, 1); 
-    });
-    
-    navigate('/daily-meals', { state: { date: selectedDateFromState } });
+      await Promise.all(
+        selectedFoodItemsList.map(item => addMealEntry(mealTypeToAdd, item, 1))
+      );
+      
+      navigate('/daily-meals', { state: { date: selectedDateFromState } });
+    } catch (error) {
+      console.error('Failed to add meals:', error);
+      setIsSubmitting(false);
+    }
   };
 
   const handleViewDetails = (foodId: string) => {
@@ -290,6 +299,7 @@ const AddMealScreen = () => {
         numSelected={numSelected}
         totalSelectedCalories={totalSelectedCalories}
         onAdd={handleAddSelectedItems}
+        isSubmitting={isSubmitting}
       />
       </div>
     </div>

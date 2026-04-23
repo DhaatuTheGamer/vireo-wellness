@@ -13,6 +13,6 @@ Individuals looking to take control of their daily health metrics, particularly 
 - **Timeline & Date Picker:** Intuitive navigation to view historical logs and future wellness goals.
 
 ## Strategic Goals
-- Provide a robust frontend architecture ready for eventual backend integration.
+- Maintain and expand a robust frontend architecture with backend API integrations (Meal Logging integrated).
 - Deliver an accessible, eye-strain-friendly interface via a permanent dark theme.
 - Ensure high code quality standards through automated testing and strict linting.
