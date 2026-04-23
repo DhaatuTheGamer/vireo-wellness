@@ -5,7 +5,7 @@ export const isValidEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
-export const isValidWidgetConfigArray = (data: any): data is WidgetConfig[] => {
+export const isValidWidgetConfigArray = (data: unknown): data is WidgetConfig[] => {
   if (!Array.isArray(data)) return false;
 
   return data.every(item =>

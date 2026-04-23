@@ -2,7 +2,7 @@
 import { useState, ElementType } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Home, ClipboardList, Plus, TabletSmartphone, Settings, LineChart } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import QuickAddModal from './QuickAddModal';
 
 interface NavItemProps {
@@ -40,7 +40,7 @@ const BottomNav = () => {
 
   return (
     <>
-      <div className="bg-slate-900/90 backdrop-blur-xl sticky bottom-0 z-40 border-t border-slate-800/50 pb-safe md:static md:w-64 md:border-t-0 md:border-r md:h-full md:flex-shrink-0 order-2 md:order-1">
+      <div className="bg-slate-900/90 backdrop-blur-xl sticky bottom-0 z-40 border-t border-slate-800/50 pb-safe md:static md:w-64 md:border-t-0 md:border-r md:h-full md:shrink-0 order-2 md:order-1">
         <div className="max-w-md md:max-w-none mx-auto flex md:flex-col justify-around md:justify-start items-center md:items-stretch px-2 md:px-0 relative md:pt-8 md:gap-2 h-full">
           <div className="hidden md:flex items-center px-6 mb-8">
             <div className="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center mr-3">

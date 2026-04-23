@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface EatenWidgetProps {
   stats: {
@@ -17,7 +17,7 @@ const EatenWidget: React.FC<EatenWidgetProps> = ({ stats, eatenPercentage, delay
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut", delay }}
-      className="bg-gradient-to-br from-emerald-900/40 to-slate-900 border border-emerald-800/30 p-6 rounded-3xl shadow-lg relative overflow-hidden mb-6"
+      className="bg-linear-to-br from-emerald-900/40 to-slate-900 border border-emerald-800/30 p-6 rounded-3xl shadow-lg relative overflow-hidden mb-6"
     >
       <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
       <div className="flex justify-between items-center relative z-10">

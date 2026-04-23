@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import { useAppContext } from '../contexts/AppContext';
 import { Device } from '../types';
@@ -57,7 +57,7 @@ const ConnectDeviceScreen = () => {
     return (
       <div className="flex flex-col h-full bg-slate-950">
         <Header title="Connecting Device" showBackButton backPath="/devices" />
-        <div className="flex-grow flex items-center justify-center p-4 text-slate-400">Device not found.</div>
+        <div className="grow flex items-center justify-center p-4 text-slate-400">Device not found.</div>
       </div>
     );
   }
@@ -133,7 +133,7 @@ const ConnectDeviceScreen = () => {
                   animate={{ width: `${connectionProgress}%` }}
                   transition={{ ease: "linear" }}
                 >
-                  <div className="absolute inset-0 bg-white/20 animate-[shimmer_1s_infinite] -skew-x-12 translate-x-[-100%]" />
+                  <div className="absolute inset-0 bg-white/20 animate-[shimmer_1s_infinite] -skew-x-12 -translate-x-full" />
                 </motion.div>
               </div>
             </motion.div>

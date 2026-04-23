@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatPhoneNumber } from './validation';
+import { formatPhoneNumber } from '../../utils/validation';
 
 describe('formatPhoneNumber', () => {
   it('should allow a standard 10-digit number', () => {

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Activity } from 'lucide-react';
 
 const SplashScreen: React.FC = () => {
@@ -21,7 +21,7 @@ const SplashScreen: React.FC = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="flex-shrink-0 mt-12 relative z-10"
+        className="shrink-0 mt-12 relative z-10"
       > 
         <h1 className="text-4xl font-black text-white tracking-tighter">
           Vireo<span className="text-emerald-500">.</span>
@@ -75,7 +75,7 @@ const SplashScreen: React.FC = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.4, type: "spring", stiffness: 200, damping: 20 }}
-            className="w-32 h-32 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl shadow-emerald-500/40 relative z-10"
+            className="w-32 h-32 bg-linear-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl shadow-emerald-500/40 relative z-10"
           >
             <Activity className="w-16 h-16 text-slate-950" />
           </motion.div>

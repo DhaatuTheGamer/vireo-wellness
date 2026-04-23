@@ -1,7 +1,7 @@
 
 import { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import { useAppContext } from '../contexts/AppContext';
 import { SelectedFoodItem, MealType } from '../types';
@@ -22,7 +22,7 @@ const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd }: SelectionBa
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 100, opacity: 0 }}
-        className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-slate-950 via-slate-950 to-transparent pt-12 pb-safe"
+        className="absolute bottom-0 left-0 right-0 p-5 bg-linear-to-t from-slate-950 via-slate-950 to-transparent pt-12 pb-safe"
       >
         <button
           type="button"
@@ -158,7 +158,7 @@ const FoodListItem = ({ item, onToggleSelect, onViewDetails }: FoodListItemProps
           alt={item.name}
           className="w-16 h-16 rounded-xl object-cover mr-4 shadow-sm"
         />
-        <div className="flex-grow">
+        <div className="grow">
           <h3 className="text-base font-bold text-white mb-0.5">{item.name}</h3>
           <p className="text-sm font-medium text-emerald-400">{item.calories} <span className="text-slate-500 text-xs">kcal</span></p>
         </div>

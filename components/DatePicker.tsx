@@ -2,7 +2,7 @@
 import React, { useMemo, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { format } from 'date-fns';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface DatePickerProps {
   selectedDate: Date;
@@ -83,7 +83,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
               onClick={() => onDateChange(date)}
               aria-pressed={isSelected}
               aria-label={fullDateStr}
-              className={`relative flex flex-col items-center justify-center min-w-[3rem] h-16 rounded-2xl p-2 transition-all duration-300 ease-out snap-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500
+              className={`relative flex flex-col items-center justify-center min-w-12 h-16 rounded-2xl p-2 transition-all duration-300 ease-out snap-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500
                 ${isSelected ? 'text-white shadow-lg shadow-emerald-500/20 scale-110' : 'bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-slate-200'}
                 ${isToday && !isSelected ? 'border border-emerald-500/50' : 'border border-transparent'} 
               `}

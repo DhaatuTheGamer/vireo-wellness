@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import BloodSugarChart from '../components/BloodSugarChart';

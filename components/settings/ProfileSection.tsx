@@ -1,5 +1,5 @@
 import { useState, ReactNode, ChangeEvent, ElementType } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { User, Mail, Phone, Edit2, Check, ChevronDown } from 'lucide-react';
 import { useAppContext } from '../../contexts/AppContext';
 import { isValidEmail } from '../../utils/validators';
@@ -31,7 +31,7 @@ function ProfileField({ id, icon: Icon, label, children, border = true, alignSta
       <div className={`p-2 bg-slate-800 rounded-xl ${alignStart ? 'mt-1' : ''}`}>
         <Icon className="w-5 h-5 text-slate-400" />
       </div>
-      <div className="flex-grow">
+      <div className="grow">
         <label htmlFor={id} className="text-xs text-slate-500 font-medium block mb-0.5">{label}</label>
         {children}
       </div>

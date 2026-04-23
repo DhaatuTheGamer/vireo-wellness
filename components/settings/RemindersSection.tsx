@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Bell, Shield, Activity, ChevronRight, Droplet, Pill, Trash2, Plus } from 'lucide-react';
 import { Reminder, ReminderType } from '../../types';
 import { useAppContext } from '../../contexts/AppContext';

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
@@ -49,7 +49,7 @@ const DailyMedicationsScreen: React.FC = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="flex justify-between items-center bg-gradient-to-r from-cyan-900/40 to-blue-900/20 border border-cyan-800/30 p-5 rounded-3xl"
+                        className="flex justify-between items-center bg-linear-to-r from-cyan-900/40 to-blue-900/20 border border-cyan-800/30 p-5 rounded-3xl"
                     >
                         <div>
                             <p className="text-sm font-medium text-cyan-200/70 mb-1">Total Taken</p>
